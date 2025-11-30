@@ -2,96 +2,102 @@
 
 ### Objectives 🎯
 
-In this challenge, we'll learn:
-- How to **break down large problems** into small problems.
-- How to create different **modules**, and use functions from another module.
-- How to **run tests efficiently**.
-- Get familiar with the concept of **encoding and decoding**: we will encounter this again in the Deep Learning module.
+Bu challenge’ta şunları öğreneceğiz:
+-Büyük problemleri parçalara ayırarak küçük problemler hâlinde çözmek.
+-Farklı module’ler oluşturmak ve başka bir module içindeki function’ları kullanmak.
+-Testleri verimli bir şekilde çalıştırmak.(**run tests efficiently**)
+-**Encoding ve decoding** kavramlarına aşina olmak: Bunu Deep Learning module’ünde tekrar göreceğiz.
 
-### ❔ Background
 
-(From [Wikipedia](https://en.wikipedia.org/wiki/Morse_code)) Beginning in 1836, the American artist Samuel F. B. Morse, the American physicist Joseph Henry, and Alfred Vail developed an electrical telegraph system. This system sent pulses of electric current along wires which controlled an electromagnet that was located at the receiving end of the telegraph system. A code was needed to transmit natural language using only these pulses, and the silence between them. Around 1837, Morse, therefore, developed an early forerunner to the modern **International Morse code**.
+### ❔ Arka plan
 
-In this exercise, we'll write a morse code **encoder** and **decoder**. We'll just consider the 26 letters of the English alphabet, ("A" -> "Z") and ignore all other characters (numbers, punctuation, etc.).
+Wikipedia’ya göre 1836’dan itibaren Amerikalı sanatçı Samuel F. B. Morse, Amerikalı fizikçi Joseph Henry ve Alfred Vail bir elektrikli telgraf sistemi geliştirdiler. Bu sistem, telgraf sisteminin alıcı ucunda bulunan bir elektromıknatısı kontrol eden elektrik akımı darbelerini kablolar üzerinden iletiyordu. Sadece bu darbeler ve aralarındaki sessizliği kullanarak doğal dili iletebilmek için bir kod gerekiyordu. Yaklaşık 1837 civarında Morse, modern International Morse code’un erken bir öncülünü geliştirdi.
 
-### ⚙️ Setup
+Bu alıştırmada bir Morse code encoder ve decoder yazacağız. Yalnızca İngiliz alfabesindeki 26 harfi (“A” -> “Z”) ele alacağız ve diğer tüm karakterleri (sayılar, noktalama işaretleri vb.) yok sayacağız.
 
-For this challenge, make sure you open the challenge from the root of this challenge folder, and open VS Code from that place:
+### ⚙️ Kurulum
+
+Bu challenge için, klasörün kök dizininden çalıştığından emin ol ve VS Code’u da oradan aç:
 
 ```bash
 cd ~/code/<user.github_nickname>/{{ local_path_to("01-Python/01-Programming-Basics/06-Morse-Code") }}
 code .
 ```
 
-We will be working with multiple files in this challenge, so it's important you always work from this location.
+Bu challenge’ta birden fazla dosya ile çalışacağız, bu yüzden her zaman bu konumdan çalışman önemli.
 
 ### 🏗️ Workflow
 
-We'll break down the code in multiple smaller modules that we can reuse. We will then have to import them. Start by looking at the files in the `morse` directory. In the `mapping.py` file we already gave you a dictionary with the Morse code for the letters of the alphabet.
+Yazdığımız kodu, tekrar kullanılabilir birden fazla küçük module’e böleceğiz. Sonra bunları import etmemiz gerekecek. Önce `morse` klasöründeki dosyalara bakarak başla. `mapping.py` dosyasında, alfabenin harfleri için Morse code içeren bir dictionary’yi sana zaten verdik.
 
-### ➡️ Code the encoder
+### ➡️ Encoder’ı yaz
 
-First, implement the `encode` method in `morse/encoder.py` which will take text as a parameter and return the Morse sequence for it. Letters of the same word will be separated by a space and words will be separated by a pipe character `|`.
+Önce, morse/encoder.py içinde encode method’unu implement et. Bu method parametre olarak bir text alacak ve bunun Morse karşılığını döndürecek. Aynı kelime içindeki harfler arada bir boşluk olacak şekilde, kelimeler ise | karakteri ile ayrılacak.
 
-For example, the sentence `"Hi Guys"` should be encoded into `".... ..|--. ..- -.-- ..."`
+Örneğin "Hi Guys" cümlesi ".... ..|--. ..- -.-- ..." şeklinde encode edilmelidir.
 
-Break down the complexity by creating two functions: first code a function to encode one word. Then you can call the `encode_word` function from the `encode` function to encode a complete sentence.
+Karmaşıklığı azaltmak için iki function yazarak ilerle: önce tek bir kelimeyi encode eden bir function yaz. Sonra bir cümleyi encode etmek için encode function’ı içinde encode_word function’ını çağırabilirsin.
 
-### 🧪 Running and testing your code
+### 🧪 Kodunu çalıştırma ve test etme
 
-Before you run the tests, make sure your code works without errors. We added an `if __name__ == "__main__"` block for you to try out your code. We'll use a slightly different way of running our code because we use multiple files in this challenge.
+Testleri çalıştırmadan önce kodunun hatasız çalıştığından emin ol. Deneme yapabilmen için if __name__ == "__main__" bloğunu ekledik. Bu challenge’ta birden fazla dosya kullandığımız için kodumuzu biraz farklı şekilde çalıştıracağız.
 
-Run this to run your code:
+Kodunu çalıştırmak için şunu yaz:
 
 ```bash
 python -m morse.encoder
 ```
 
-This executes the `encoder` module inside our `morse` package. A module is a single file, `encoder.py` in our case, and a package is a collection of modules. Note how in this case we can write it in the same way as when we import code: we use `.` as a separator, and we don't include `.py` at the end.
+Bu, `morse` package’i içindeki `encoder` module’ünü çalıştırır. Bizim durumumuzda module, `encoder.py` dosyasıdır, package ise module’lerin bir koleksiyonudur.
+Burada dikkat et: import ederken kullandığımız yapının aynısını kullanıyoruz; ayırmak için `.`  kullanıyoruz ve sonuna `.py` eklemiyoruz.
 
 <details>
   <summary markdown='span'>
   ⛓️‍💥 Getting an error <code>No module named 'morse'</code>?
   </summary>
 
-Your terminal is probably not based in the root folder of the challenge. Maybe you moved into the `morse` folder? In that case, move one level up in your terminal.
+Terminalin muhtemelen challenge’ın kök klasöründe değil. Belki `morse`  klasörüne geçtin? Öyleyse terminalde bir seviye yukarı çık.
 
-Or did you open VS Code from inside the `morse` folder? In that case, close VS Code, and open it again from the main folder of this challenge.
+Ya da VS Code’u `morse`  klasörünün içinden mi açtın? Bu durumda VS Code’u kapat ve bu challenge’ın ana klasöründen tekrar aç.
 
-The location from where you run your code is important when you use multiple files. We'll see ways to make this a bit less tricky later during the bootcamp.
+Birden fazla dosya kullandığında, kodu nereden çalıştırdığın önem kazanır. Bu dersler ilerledikçe bu işi daha az zahmetli hâle getiren yöntemler göreceğiz.
+
+
 
 </details>
 
 <details>
   <summary markdown='span'>
-  🤔 Why use this method? [Advanced remark - Optional]
+  🤔 Neden bu yöntemi kullanıyoruz? [Advanced remark - Optional]
   </summary>
 
-Python becomes a bit tricky if you use multiple files.
+Python, birden fazla dosya kullandığında biraz karışık hâle gelebiliyor.
 
-When we run `python morse/encoder.py`, Python adds the location of the `.py` file to the path where it looks for packages and modules, i.e. `./morse/`. But in there it won't find the `morse` package, bit only the `encoder` and `mapping` module. So to import from `mapping` we'd have to write `from mapping import MORSE`.
+ `python morse/encoder.py` komutunu çalıştırdığımızda Python, `.py` dosyasının konumunu, package ve module aradığı path’e ekler, yani `./morse/`. Ancak burada `morse` package’ini bulamaz sadece, `encoder` ve `mapping` module’lerini görür. Bu yüzden mapping’den import etmek için `from mapping import MORSE`yazmamız gerekir.
 
-The problem is that later on, when we run the tests, Python will add our current location to its search path, not the location of the `.py` files. And so we'd need `from morse.mapping import MORSE` instead.
+Sorun şu ki daha sonra testleri çalıştırdığımızda Python, arama path’ine `.py` dosyalarının konumunu değil, o anki çalışma konumumuzu ekler. Bu yüzden bu sefer de `from morse.mapping import MORSE` yazmamız gerekir.
 
-When we run `python -m morse.encoder`, Python adds our current location to its search path. In there it can find the `morse` module. And so we can write `from morse.mapping import MORSE`. And that will also work with our tests. Problem solved.
+`python -m morse.encoder` çalıştırdığımızda Python, arama path’ine mevcut konumumuzu ekler. Burada `morse` module’ünü bulabilir. Dolayısıyla `from morse.mapping import MORSE` yazabiliriz. Bu da testlerimizle birlikte sorunsuz çalışır. Problem çözülmüş olur.
+
 
 </details>
 
-Once that works, you can run the tests for your encoder. You could run `make`, but that would run all the tests, including those for the encoder, that we haven't coded yet. So instead run this:
+Bu kısım çalıştıktan sonra encoder için testleri çalıştırabilirsin. make komutunu kullanabilirsin ama bu tüm testleri çalıştırır; henüz yazmadığımız decoder testlerini de. Bunun yerine şunu çalıştır:
 
 ```bash
 pytest -v -k encoder
 ```
 
-> **Why do we use `-v` and `-k`?**
+> **Neden -v ve -k kullanıyoruz?**
 >
-> With the `-v` we tell pytest to report on the individual tests within a test class. Try it out without the `-v` and see the difference.
+> -v ile pytest’e, bir test class’ı içindeki her bir testi ayrı ayrı raporlamasını söylüyoruz. Bir de -v olmadan dene, farkı gör.
 >
-> With the `-k encoder` at the end, we ask pytest to only run tests that contain "encoder" in their name.
+> Sondaki -k encoder ile pytest’ten adında "encoder" geçen testleri çalıştırmasını istiyoruz.
 >
-> You can combine conditions like this too: `pytest -v -k "encoder and not pipe"` to run all tests with "encoder" in their name, but excluding those with "pipe" in their name.
+> Bu tür koşulları birleştirebilirsin: pytest -v -k "encoder and not pipe"
+Bu komut, adında "encoder" geçen ama "pipe" geçmeyen testleri çalıştırır.
 
-Before we move on to the decoder, don't forget to:
+Decoder’a geçmeden önce şunları yapmayı unutma:
 
 ```bash
 git add morse/encoder.py
@@ -99,30 +105,31 @@ git commit -m "Finished the encoder"
 git push
 ```
 
-### ⬅️ Code the decoder
+### ⬅️ Decoder’ı yaz
 
-Once the encoder is working, you can start working on the `decode` method in `morse/decoder.py` which will do the opposite!
+Encoder çalışır hâle geldikten sonra, tam tersini yapacak olan `decode` method’u üzerinde çalışmaya başlayabilirsin. Bu method `morse/decoder.py` içinde olacak!
 
-Again, first run the code (`python -m morse.decoder`), then run the tests for the decoder only.
+Yine önce kodu çalıştır (`python -m morse.decoder`), sonra sadece decoder testlerini çalıştır.
 
-How can you try out your code without having to write Morse code yourself? In the `if __name__ == "__main__"`, you can first use your **en**coder functions to encode text into Morse code. Then use your **de**coder functions to decode back into text. The result should be your original input (in uppercase).
+Morse code’u elle yazmak zorunda kalmadan kodunu nasıl deneyebilirsin? `if __name__ == "__main__"` bloğunda önce encoder function’larını kullanarak text’i Morse code’a çevirebilirsin. Sonra **de**coder function’larını kullanarak tekrar text’e decode edersin. Sonuç, orijinal girdinle (uppercase hâlinde) aynı olmalıdır.
 
-Before you move on to the last part, commit and push your changes!
+Son bölüme geçmeden önce değişikliklerini commit edip push etmeyi unutma!
 
-### ✅ Testing everything
 
-With your encoder and decoder finished, it's time to run all the tests. This time you can just run `make`.
+### ✅ Tüm Testleri Çalıştırma
 
-All your tests should pass green. Now the only thing that's left is to get good coding style. Make sure to get 10/10. If you don't understand why you're not getting good coding style, ask a TA.
+Encoder ve decoder işini bitirdiğinde, tüm testleri çalıştırma zamanı. Bu sefer direkt `make`çalıştırabilirsin.
 
-Once you're done with this part, commit and push again.
+Tüm testlerin yeşil geçmesi gerekiyor. Geriye kalan tek şey iyi bir coding style elde etmek. 10/10 aldığından emin ol. Eğer neden iyi bir style skoru alamadığını anlamıyorsan, bir TA’ye sor.
 
-### 💡 A final word on encoding and decoding
+Bu kısmı da bitirdikten sonra tekrar commit ve push yap.
 
-Encoding and decoding as we applied it here is the process of converting data into a specific format for transmission or storage, and then reversing it to retrieve the original information.
+### 💡 Encoding ve decoding hakkında son bir söz
 
-So if you encode a message and then decode the result of the encoding, you should get the original input back, right?
+Burada uyguladığımız hâliyle encoding ve decoding, veriyi iletim veya depolama için belirli bir formata dönüştürme ve daha sonra orijinal bilgiyi geri elde etmek için bu işlemi tersine çevirme sürecidir.
 
-But did we? Not completely: Morse code is case-insensitive. So both `a` and `A` are encoded into the same code. So when we decode the result, we'll see that we lost a bit of information: wether the text was capitalized or not.
+Yani bir mesajı encode edip sonra decode edersen, teoride orijinal girdiyi geri alman gerekir, değil mi?
 
-In Deep Learning we'll see similar things happening. Stay tuned for that!
+Ama gerçekten öyle mi oldu? Tam olarak değil: Morse code case-insensitive’dir. Yani a ve A aynı code’a encode edilir. Dolayısıyla decode ettiğimizde küçük/büyük harf bilgisi kaybolur; yani text’in başta büyük harfli mi yoksa küçük harfli mi olduğu bilgisini kaybetmiş oluruz.
+
+Deep Learning’de de benzer şeylerin olduğunu göreceğiz. Takipte kal !
